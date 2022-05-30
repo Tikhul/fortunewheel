@@ -216,9 +216,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToMax: 2
-  _timeAtMax: 2
+  _timeAtMax: 4
   _timeAfterMax: 0
-  _maxSpeed: 0
+  _maxSpeed: 360
 --- !u!1 &677470275
 GameObject:
   m_ObjectHideFlags: 0
