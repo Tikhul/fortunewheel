@@ -3,12 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class WheelController : FortuneWheelElement
 {
     private void Start()
     {
         CreateWheel();
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            RotateWheel();
+        }
     }
     private void CreateWheel()
  // Создание колеса
@@ -24,7 +32,7 @@ public class WheelController : FortuneWheelElement
     }
 
     public void CollectSectorInfo(int id, double initZ, double finalZ)
-// Словарь в формате Id сектора : [начальный градус, конечный градус]
+// Словарь в формате <Id сектора : [начальный градус, конечный градус]>
     {
         List<double> tempList = new List<double>();
         tempList.Add(initZ);
@@ -37,5 +45,12 @@ public class WheelController : FortuneWheelElement
 // Сбор всех чисел вероятности
     {
         Game.Model.WheelModel.ProbabilitySum += sectorProbability;
+    }
+
+    private void RotateWheel()
+    {
+        Debug.Log("RotateWheel");
+        Game.Model.WheelModel.SectorsParent.transform.DORotate(new Vector3(0, 0, 360), 5, RotateMode.FastBeyond360)
+            ;
     }
 }
