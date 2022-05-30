@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class RotationController : FortuneWheelElement
 {
-    private Sequence rotationSequence;
+    private Sequence rotationSequence; // Общая последовательность
 
     private void Update()
     {
@@ -20,32 +20,44 @@ public class RotationController : FortuneWheelElement
     private void CollectSequence()
 // Заполнение очереди анимаций
     {
-  //      rotationSequence.Append(StartWheel());
+        rotationSequence.Append(StartWheel());
         rotationSequence.Append(MiddleWheel());
+        rotationSequence.Append(FinalWheel());
     }
- //   private Tweener StartWheel()
-// От старта до максимальной скорости
-    //{
-    //    Tweener startTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-    //        new Vector3(0, 0, -360), Game.Model.RotationModel.TimeToMax, RotateMode.FastBeyond360)
-    //        .SetLoops(-1, LoopType.Incremental)
-    //        .SetEase(Ease.Linear);
-    //    return startTween;
-    //}
+    private Tweener StartWheel()
+ //    От старта до максимальной скорости
+    {
+        float acceleration = Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeToMax; // Расчет ускорения
+        float totalRotation = (acceleration * Game.Model.RotationModel.TimeToMax * Game.Model.RotationModel.TimeToMax) / 2; // Расчет градусов поворота
+
+        Tweener startTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
+            new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeToMax, RotateMode.FastBeyond360)
+            .SetRelative(true)
+            .SetEase(Ease.InSine);
+        return startTween;
+    }
     private Tweener MiddleWheel()
-    // Вращение на максимальной скорости
+ // Вращение на максимальной скорости
     {
         float totalRotation = Game.Model.RotationModel.MaxSpeed * Game.Model.RotationModel.TimeAtMax; // Сколько градусов должен пройти
-        Debug.Log(totalRotation);
+
         Tweener middleTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
             new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAtMax, RotateMode.FastBeyond360)
             .SetRelative(true)
             .SetEase(Ease.Linear);
         return middleTween;
     }
-    //    private Tweener FinalWheel()
-    //// Замедление до нужного сектора
-    //    {
 
-    //    }
+    private Tweener FinalWheel()
+    // Замедление до нужного сектора
+    {
+        float deceleration = Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeAfterMax; // Расчет замедления
+        float totalRotation = (deceleration * Game.Model.RotationModel.TimeAfterMax * Game.Model.RotationModel.TimeAfterMax) / 2; // Расчет градусов поворота
+
+        Tweener finalTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
+            new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAfterMax, RotateMode.FastBeyond360)
+            .SetRelative(true)
+            .SetEase(Ease.OutSine);
+        return finalTween;
+    }
 }
