@@ -11,21 +11,25 @@ public class WheelController : FortuneWheelElement
         CreateWheel();
     }
     private void CreateWheel()
+ // —оздание колеса
     {
         double initialRotation = 0;
         double rotationStep = 360 / Game.Model.WheelModel.Sectors.Count;
 
         for (int i = 0; i < Game.Model.WheelModel.Sectors.Count; i++)
         {
-            Image newSector = Instantiate(Game.Model.WheelModel.SectorPrefab);
-            newSector.transform.parent = Game.Model.WheelModel.WheelCanvas.transform;
-            newSector.sprite = Game.Model.WheelModel.Sectors[i].SourceImage;
-            newSector.GetComponent<SectorView>().SetRotation(initialRotation+=Math.Round(rotationStep, 3));
+            Game.Controller.SectorController.SetUpSector(initialRotation, i);
             initialRotation += Math.Round(rotationStep, 3);
         }
     }
     private void CollectProbabilitySum()
 // ќбща€ веро€тность по всем секторам
+    {
+
+    }
+
+    private void CollectSectorInfo()
+// —ловарь в формате Id сектора : [начальный градус, конечный градус, веро€тность выпадени€]
     {
 
     }

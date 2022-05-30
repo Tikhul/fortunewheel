@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class FortuneWheelView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private SectorView _sectorView;
 
-    // Update is called once per frame
-    void Update()
+    public SectorView SectorView
     {
-        
+        get => _sectorView;
+        set => _sectorView = value;
     }
 }

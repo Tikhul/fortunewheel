@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb31dacdfbd2cba4f982bd96cda437a2, type: 3}
   m_Name: SectorScriptableObject 2
   m_EditorClassIdentifier: 
+  _id: 2
   _probability: 0
   _sourceImage: {fileID: 21300000, guid: b3ba6999698936546b3a8e65f41e0e93, type: 3}
