@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 public class SectorController : FortuneWheelElement
 {
-    public void SetUpSector(double zRotation, int index)
+    public void SetUpSector(double rotationStep, double zRotation, int index)
+// Создание и настройка сектора
     {
         Image newSector = Instantiate(Game.Model.WheelModel.SectorPrefab);
         newSector.transform.SetParent(Game.Model.WheelModel.WheelCanvas.transform);
@@ -14,7 +15,8 @@ public class SectorController : FortuneWheelElement
         newSector.transform.localScale = new Vector3(1, 1, 1);
         newSector.transform.localPosition = newSector.transform.position;
         newSector.transform.localRotation = Quaternion.Euler(0, 0, (float)zRotation);
-        newSector.fillAmount = (float)Math.Round((decimal)1 / Game.Model.WheelModel.Sectors.Count, 3);
+        newSector.fillAmount = (float)Math.Round((double)1 / Game.Model.WheelModel.Sectors.Count, 3);
+        Game.Controller.WheelController.CollectSectorInfo(index, zRotation - rotationStep, zRotation);
+        Game.Controller.WheelController.CollectProbabilityInfo(Game.Model.WheelModel.Sectors[index].Probability);
     }
-
 }

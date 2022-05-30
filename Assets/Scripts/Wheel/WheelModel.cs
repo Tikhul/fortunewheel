@@ -5,11 +5,17 @@ using UnityEngine.UI;
 
 public class WheelModel : FortuneWheelElement
 {
+    private Dictionary<int, List<double>> _sectorsInfo = new Dictionary<int, List<double>>();
     private int _probabilitySum;
     [SerializeField] private Canvas _wheelCanvas;
     [SerializeField] private List<SectorSO> _sectors;
     [SerializeField] private Image _sectorPrefab;
 
+    public Dictionary<int, List<double>> SectorsInfo
+    {
+        get => _sectorsInfo;
+        set => _sectorsInfo = value;
+    }
     public int ProbabilitySum
     {
         get => _probabilitySum;

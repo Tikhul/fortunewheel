@@ -14,23 +14,28 @@ public class WheelController : FortuneWheelElement
  // Создание колеса
     {
         double initialRotation = 0;
-        double rotationStep = 360 / Game.Model.WheelModel.Sectors.Count;
+        double rotationStep = Math.Round((double)360 / Game.Model.WheelModel.Sectors.Count, 3);
 
         for (int i = 0; i < Game.Model.WheelModel.Sectors.Count; i++)
         {
-            Game.Controller.SectorController.SetUpSector(initialRotation, i);
-            initialRotation += Math.Round(rotationStep, 3);
+            Game.Controller.SectorController.SetUpSector(rotationStep, initialRotation, i);
+            initialRotation += rotationStep;
         }
     }
-    private void CollectProbabilitySum()
-// Общая вероятность по всем секторам
-    {
 
+    public void CollectSectorInfo(int id, double initZ, double finalZ)
+// Словарь в формате Id сектора : [начальный градус, конечный градус]
+    {
+        List<double> tempList = new List<double>();
+        tempList.Add(initZ);
+        tempList.Add(finalZ);
+        Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
+//        Debug.Log(id.ToString() + " " + initZ.ToString() + " " + finalZ.ToString());
     }
 
-    private void CollectSectorInfo()
-// Словарь в формате Id сектора : [начальный градус, конечный градус, вероятность выпадения]
+    public void CollectProbabilityInfo(int sectorProbability)
+// Сбор всех чисел вероятности
     {
-
+        Game.Model.WheelModel.ProbabilitySum += sectorProbability;
     }
 }
