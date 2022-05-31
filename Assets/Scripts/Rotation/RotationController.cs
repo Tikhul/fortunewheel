@@ -51,13 +51,23 @@ public class RotationController : FortuneWheelElement
     private Tweener FinalWheel()
     // Замедление до нужного сектора
     {
+        Game.Controller.WheelController.LaunchWinnerChoice(); // Выбор победителя
         float deceleration = Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeAfterMax; // Расчет замедления
-        float totalRotation = (deceleration * Game.Model.RotationModel.TimeAfterMax * Game.Model.RotationModel.TimeAfterMax) / 2; // Расчет градусов поворота
+        float fullRotation = (float)Math.Floor((deceleration * Game.Model.RotationModel.TimeAfterMax * Game.Model.RotationModel.TimeAfterMax) / 2 / 360); // Расчет градусов поворота на 360
+        float totalRotation = fullRotation + RotationToWinner(); // Доводим поворот до победителя
 
         Tweener finalTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
             new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAfterMax, RotateMode.FastBeyond360)
             .SetRelative(true)
             .SetEase(Ease.OutSine);
         return finalTween;
+    }
+
+    private float RotationToWinner()
+    {
+        List<double> degrees = Game.Model.WheelModel.SectorsInfo[Game.Model.WheelModel.WinnerId];
+        float minDegree = (float)(degrees[0] - (degrees[0] / 2 * 0.9));
+        float maxDegree = (float)(degrees[1] + (degrees[1] / 2 * 0.9));
+        return UnityEngine.Random.Range(minDegree, maxDegree);
     }
 }

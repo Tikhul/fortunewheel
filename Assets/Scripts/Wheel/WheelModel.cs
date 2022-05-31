@@ -7,10 +7,11 @@ public class WheelModel : FortuneWheelElement
 {
     private Dictionary<int, List<double>> _sectorsInfo = new Dictionary<int, List<double>>();
     private int _probabilitySum;
-    // [SerializeField] private Canvas _wheelCanvas;
     [SerializeField] private GameObject _sectorsParent;
     [SerializeField] private List<SectorSO> _sectors;
     [SerializeField] private Image _sectorPrefab;
+    [SerializeField] private int _winnerId;
+    [SerializeField] private bool _randomWinner = true;
 
     public GameObject SectorsParent
     {
@@ -27,12 +28,7 @@ public class WheelModel : FortuneWheelElement
         get => _probabilitySum;
         set => _probabilitySum = value;
     }
-    //public Canvas WheelCanvas
-    //{
-    //    get => _wheelCanvas;
-    //    set => _wheelCanvas = value;
-    //}
-
+    
     public List<SectorSO> Sectors
     {
         get
@@ -50,6 +46,17 @@ public class WheelModel : FortuneWheelElement
         set => _sectors = value;
     }
 
+    public int WinnerId
+    {
+        get => _winnerId;
+        set => _winnerId = value;
+    }
+
+    public bool RandomWinner
+    {
+        get => _randomWinner;
+        set => _randomWinner = value;
+    }
     public Image SectorPrefab
     {
         get => _sectorPrefab;

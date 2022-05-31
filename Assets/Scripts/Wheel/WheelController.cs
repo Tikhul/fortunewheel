@@ -30,12 +30,55 @@ public class WheelController : FortuneWheelElement
         tempList.Add(initZ);
         tempList.Add(finalZ);
         Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
-//        Debug.Log(id.ToString() + " " + initZ.ToString() + " " + finalZ.ToString());
+//     Debug.Log(id.ToString() + " " + initZ.ToString() + " " + finalZ.ToString());
     }
 
     public void CollectProbabilityInfo(int sectorProbability)
 // Сбор всех чисел вероятности
     {
         Game.Model.WheelModel.ProbabilitySum += sectorProbability;
+    }
+
+    public void LaunchWinnerChoice()
+// Выбор победителя (запуск)
+    {
+        if (Game.Model.WheelModel.RandomWinner)
+        {
+            ChooseRandomWinner();
+        }
+        else
+        {
+            ChooseParticularWinner();
+        }
+    }
+    private void ChooseRandomWinner()
+// Выбор сектора-победителя в зависимости от вероятности выпадения
+    {
+        int randWinner = UnityEngine.Random.Range(1, Game.Model.WheelModel.ProbabilitySum + 1);
+        foreach (SectorSO sector in Game.Model.WheelModel.Sectors)
+        {
+            for(int i = 1; i <= sector.Probability; i++)
+            {
+                if (i == randWinner)
+                {
+                    Game.Model.WheelModel.WinnerId = sector.Id;
+                    break;
+                }
+            }
+        }
+    }
+
+    private void ChooseParticularWinner()
+// Назначение победителя по указанному id. Если id Некорректный, то победитель выбирается рандомно
+    {
+        if (Game.Model.WheelModel.SectorsInfo.ContainsKey(Game.Model.WheelModel.WinnerId))
+        {
+            Game.Model.WheelModel.WinnerId = Game.Model.WheelModel.WinnerId;
+        }
+        else
+        {
+            Debug.Log("Некорректный id победителя, победитель будет выбран рандомно");
+            ChooseRandomWinner();
+        }
     }
 }

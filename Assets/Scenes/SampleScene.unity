@@ -815,6 +815,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eeb053ed56bd04346912629290e9f4e5, type: 2}
   - {fileID: 11400000, guid: 7d074be16c7ba0945a65144384505549, type: 2}
   _sectorPrefab: {fileID: 2062419159778194161, guid: 555229b529f60f04a9d58f54d5b6206b, type: 3}
+  _winnerId: 0
 --- !u!1 &1884008211
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +967,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
