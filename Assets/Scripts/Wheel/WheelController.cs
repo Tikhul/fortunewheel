@@ -51,7 +51,7 @@ public class WheelController : FortuneWheelElement
                 firstList.Add(0);
                 firstList.Add(sectorProbability);
                 Game.Model.WheelModel.ProbabilityRanges.Add(id, firstList);
-                Debug.Log(firstList[0].ToString() + firstList[1].ToString());
+  //              Debug.Log(firstList[0].ToString() + firstList[1].ToString());
             }
             else
             {
@@ -59,7 +59,7 @@ public class WheelController : FortuneWheelElement
                 tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + 1);
                 tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + sectorProbability);
                 Game.Model.WheelModel.ProbabilityRanges.Add(id, tempList);
-                Debug.Log(id.ToString() + tempList[0].ToString() + tempList[1].ToString());
+                //            Debug.Log(id.ToString() + tempList[0].ToString() + tempList[1].ToString());
             }
         }
     }
@@ -80,17 +80,24 @@ public class WheelController : FortuneWheelElement
     {
         Debug.Log("ChooseRandomWinner");
         int randWinner = UnityEngine.Random.Range(1, Game.Model.WheelModel.ProbabilitySum + 1);
-        foreach (SectorSO sector in Game.Model.WheelModel.Sectors)
+
+        if (Game.Model.WheelModel.ProbabilityRanges.Count > 0)
         {
-            for(int i = 1; i <= sector.Probability; i++)
+            foreach (KeyValuePair<int, List<int>> kvp in Game.Model.WheelModel.ProbabilityRanges)
             {
-                if (i == randWinner)
+                if (kvp.Value[0] <= randWinner && randWinner <= kvp.Value[1])
                 {
-                    Game.Model.WheelModel.ActualWinnerId = sector.Id;
+                    Game.Model.WheelModel.ActualWinnerId = kvp.Key;
+                    Debug.Log(kvp.Key);
                     break;
                 }
             }
         }
+        else
+        {
+            Game.Model.WheelModel.ActualWinnerId = Game.Model.WheelModel.Sectors
+                [UnityEngine.Random.Range(0, Game.Model.WheelModel.Sectors.Count)].Id;
+        }   
     }
 
     private void ChooseParticularWinner()
