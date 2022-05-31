@@ -48,26 +48,43 @@ public class RotationController : FortuneWheelElement
         return middleTween;
     }
 
-    private Tweener FinalWheel()
+    private Sequence FinalWheel()
     // Замедление до нужного сектора
     {
         Game.Controller.WheelController.LaunchWinnerChoice(); // Выбор победителя
-        float deceleration = Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeAfterMax; // Расчет замедления
-        float fullRotation = (float)Math.Floor((deceleration * Game.Model.RotationModel.TimeAfterMax * Game.Model.RotationModel.TimeAfterMax) / 2 / 360); // Расчет градусов поворота на 360
-        float totalRotation = fullRotation + RotationToWinner(); // Доводим поворот до победителя
-
-        Tweener finalTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAfterMax, RotateMode.FastBeyond360)
-            .SetRelative(true)
-            .SetEase(Ease.OutSine);
-        return finalTween;
+        Sequence finalSequence = DOTween.Sequence();
+        finalSequence.Append(FinalFullRotations());
+        finalSequence.Append(FinalExtraRotations());
+        finalSequence.SetEase(Ease.OutSine);
+        return finalSequence;
     }
 
+    private Tweener FinalFullRotations()
+    {
+        float deceleration = Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeAfterMax; // Расчет замедления
+        float allRotation = (float)Math.Floor((deceleration * Game.Model.RotationModel.TimeAfterMax * Game.Model.RotationModel.TimeAfterMax) / 2); // Расчет общих градусов поворота
+        float totalRotation = allRotation - (allRotation % 360); // Расчеты градусов поворота на 360
+
+        Tweener finalFull = Game.Model.WheelModel.SectorsParent.transform.DORotate(
+            new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAfterMax, RotateMode.FastBeyond360)
+            .SetRelative(true);
+        return finalFull;
+    }
+
+    private Tweener FinalExtraRotations()
+    {
+        float totalRotation = RotationToWinner();
+        Debug.Log("FinalExtraRotations" + totalRotation);
+        Tweener finalExtra = Game.Model.WheelModel.SectorsParent.transform.DORotate(
+            new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAfterMax, RotateMode.FastBeyond360)
+            .SetRelative(false);
+        return finalExtra;
+    }
     private float RotationToWinner()
     {
         List<double> degrees = Game.Model.WheelModel.SectorsInfo[Game.Model.WheelModel.WinnerId];
-        float minDegree = (float)(degrees[0] - (degrees[0] / 2 * 0.9));
-        float maxDegree = (float)(degrees[1] + (degrees[1] / 2 * 0.9));
+        float maxDegree = (float)(degrees[0] - 180);
+        float minDegree = (float)(degrees[1] - 180);
         return UnityEngine.Random.Range(minDegree, maxDegree);
     }
 }
