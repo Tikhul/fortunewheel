@@ -19,6 +19,6 @@ public class SectorController : FortuneWheelElement
         newSector.GetComponent<SectorView>().SetText(Game.Model.WheelModel.Sectors[index].Id.ToString());
         Game.Controller.WheelController.CollectSectorInfo(Game.Model.WheelModel.Sectors[index].Id, zRotation - rotationStep, zRotation);
         Game.Controller.WheelController.CollectProbabilityInfo(Game.Model.WheelModel.Sectors[index].Probability);
-        Game.Controller.WheelController.CollectProbabilityRanges(Game.Model.WheelModel.Sectors[index].Probability);
+        Game.Controller.WheelController.CollectProbabilityRanges(Game.Model.WheelModel.Sectors[index].Id, Game.Model.WheelModel.Sectors[index].Probability);
     }
 }

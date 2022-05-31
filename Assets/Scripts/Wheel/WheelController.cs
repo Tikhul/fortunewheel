@@ -40,7 +40,7 @@ public class WheelController : FortuneWheelElement
         Game.Model.WheelModel.ProbabilitySum += sectorProbability;
     }
 
-    public void CollectProbabilityRanges(int sectorProbability)
+    public void CollectProbabilityRanges(int id, int sectorProbability)
 // Собираю отрезки вероятности выпадения
     {
         if (sectorProbability > 0)
@@ -50,15 +50,16 @@ public class WheelController : FortuneWheelElement
                 List<int> firstList = new List<int>();
                 firstList.Add(0);
                 firstList.Add(sectorProbability);
-                Game.Model.WheelModel.ProbabilityRanges.Add(firstList);
+                Game.Model.WheelModel.ProbabilityRanges.Add(id, firstList);
                 Debug.Log(firstList[0].ToString() + firstList[1].ToString());
             }
             else
             {
                 List<int> tempList = new List<int>();
-                tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Last()[1] + 1);
-                tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Last()[1] + sectorProbability);
-                Game.Model.WheelModel.ProbabilityRanges.Add(tempList);
+                tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + 1);
+                tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + sectorProbability);
+                Game.Model.WheelModel.ProbabilityRanges.Add(id, tempList);
+                Debug.Log(id.ToString() + tempList[0].ToString() + tempList[1].ToString());
             }
         }
     }
