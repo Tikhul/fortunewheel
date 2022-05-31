@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,6 +40,28 @@ public class WheelController : FortuneWheelElement
         Game.Model.WheelModel.ProbabilitySum += sectorProbability;
     }
 
+    public void CollectProbabilityRanges(int sectorProbability)
+// Собираю отрезки вероятности выпадения
+    {
+        if (sectorProbability > 0)
+        {
+            if (!Game.Model.WheelModel.ProbabilityRanges.Any())
+            {
+                List<int> firstList = new List<int>();
+                firstList.Add(0);
+                firstList.Add(sectorProbability);
+                Game.Model.WheelModel.ProbabilityRanges.Add(firstList);
+                Debug.Log(firstList[0].ToString() + firstList[1].ToString());
+            }
+            else
+            {
+                List<int> tempList = new List<int>();
+                tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Last()[1] + 1);
+                tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Last()[1] + sectorProbability);
+                Game.Model.WheelModel.ProbabilityRanges.Add(tempList);
+            }
+        }
+    }
     public void LaunchWinnerChoice()
 // Выбор победителя (запуск)
     {

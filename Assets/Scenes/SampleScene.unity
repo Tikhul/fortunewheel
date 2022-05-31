@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19ec0014723b5c34297e190088403d3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  calculations: {fileID: 677470278}
+  _calculations: {fileID: 677470278}
 --- !u!4 &677470277
 Transform:
   m_ObjectHideFlags: 0
@@ -829,7 +829,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eeb053ed56bd04346912629290e9f4e5, type: 2}
   - {fileID: 11400000, guid: 7d074be16c7ba0945a65144384505549, type: 2}
   _sectorPrefab: {fileID: 2062419159778194161, guid: 555229b529f60f04a9d58f54d5b6206b, type: 3}
-  _winnerId: 2
+  _receivedWinnerId: 0
   _randomWinner: 1
 --- !u!1 &1884008211
 GameObject:
