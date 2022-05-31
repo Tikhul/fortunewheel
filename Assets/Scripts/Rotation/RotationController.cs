@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class RotationController : FortuneWheelElement
 {
-    private Sequence rotationSequence; // Общая последовательность
+    //private Sequence rotationSequence; // Общая последовательность
     [SerializeField] private RotationCalculations _calculations;
 
     public RotationCalculations Calculations
@@ -14,16 +14,8 @@ public class RotationController : FortuneWheelElement
         get => _calculations;
         set => _calculations = value;
     }
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rotationSequence = DOTween.Sequence();
-            CollectSequence();
-        }
-    }
 
-    private void CollectSequence()
+    public void CollectSequence(Sequence rotationSequence)
 // Заполнение очереди анимаций
     {
         rotationSequence.Append(StartWheel());
