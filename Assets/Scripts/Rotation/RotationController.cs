@@ -56,27 +56,34 @@ public class RotationController : FortuneWheelElement
         finalSequence.Append(FinalFullRotations());
         finalSequence.Append(FinalExtraRotations());
         finalSequence.SetEase(Ease.OutSine);
+
         return finalSequence;
     }
 
+    private float time1 = 0;
+    private float time2 = 0;
     private Tweener FinalFullRotations()
+// Основные (полные) повороты до остановки
     {
         float deceleration = Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeAfterMax; // Расчет замедления
         float allRotation = (float)Math.Floor((deceleration * Game.Model.RotationModel.TimeAfterMax * Game.Model.RotationModel.TimeAfterMax) / 2); // Расчет общих градусов поворота
         float totalRotation = allRotation - (allRotation % 360); // Расчеты градусов поворота на 360
+        time1 = (float)(Game.Model.RotationModel.TimeAfterMax - Math.Sqrt(2 * allRotation / deceleration));
 
         Tweener finalFull = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAfterMax, RotateMode.FastBeyond360)
+            new Vector3(0, 0, -totalRotation), time1, RotateMode.FastBeyond360)
             .SetRelative(true);
         return finalFull;
     }
 
     private Tweener FinalExtraRotations()
+// Докручивание до победителя
     {
         float totalRotation = RotationToWinner();
-        Debug.Log("FinalExtraRotations" + totalRotation);
+        time2 = Game.Model.RotationModel.TimeAfterMax - time1;
+
         Tweener finalExtra = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, -totalRotation), Game.Model.RotationModel.TimeAfterMax, RotateMode.FastBeyond360)
+            new Vector3(0, 0, -totalRotation), time2, RotateMode.FastBeyond360)
             .SetRelative(false);
         return finalExtra;
     }
