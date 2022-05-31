@@ -54,6 +54,7 @@ public class WheelController : FortuneWheelElement
     private void ChooseRandomWinner()
 // Выбор сектора-победителя в зависимости от вероятности выпадения
     {
+        Debug.Log("ChooseRandomWinner");
         int randWinner = UnityEngine.Random.Range(1, Game.Model.WheelModel.ProbabilitySum + 1);
         foreach (SectorSO sector in Game.Model.WheelModel.Sectors)
         {
@@ -61,7 +62,7 @@ public class WheelController : FortuneWheelElement
             {
                 if (i == randWinner)
                 {
-                    Game.Model.WheelModel.WinnerId = sector.Id;
+                    Game.Model.WheelModel.ActualWinnerId = sector.Id;
                     break;
                 }
             }
@@ -71,9 +72,10 @@ public class WheelController : FortuneWheelElement
     private void ChooseParticularWinner()
 // Назначение победителя по указанному id. Если id Некорректный, то победитель выбирается рандомно
     {
-        if (Game.Model.WheelModel.SectorsInfo.ContainsKey(Game.Model.WheelModel.WinnerId))
+        Debug.Log("ChooseParticularWinner");
+        if (Game.Model.WheelModel.SectorsInfo.ContainsKey(Game.Model.WheelModel.ReceivedWinnerId))
         {
-            Game.Model.WheelModel.WinnerId = Game.Model.WheelModel.WinnerId;
+            Game.Model.WheelModel.ActualWinnerId = Game.Model.WheelModel.ReceivedWinnerId;
         }
         else
         {

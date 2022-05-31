@@ -61,8 +61,6 @@ public class RotationController : FortuneWheelElement
         return finalSequence;
     }
 
-    private float time1 = 0;
-    private float time2 = 0;
     private Tweener FinalFullRotations()
 // Основные (полные) повороты до остановки
     {
