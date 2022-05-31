@@ -16,7 +16,8 @@ public class SectorController : FortuneWheelElement
         newSector.transform.localPosition = newSector.transform.position;
         newSector.transform.localRotation = Quaternion.Euler(0, 0, (float)zRotation);
         newSector.fillAmount = (float)Math.Round((double)1 / Game.Model.WheelModel.Sectors.Count, 3);
-        Game.Controller.WheelController.CollectSectorInfo(index, zRotation - rotationStep, zRotation);
+        newSector.GetComponent<SectorView>().SetText(Game.Model.WheelModel.Sectors[index].Id.ToString());
+        Game.Controller.WheelController.CollectSectorInfo(Game.Model.WheelModel.Sectors[index].Id, zRotation - rotationStep, zRotation);
         Game.Controller.WheelController.CollectProbabilityInfo(Game.Model.WheelModel.Sectors[index].Probability);
     }
 }

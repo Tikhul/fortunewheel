@@ -1,28 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SectorView : FortuneWheelElement
 {
-    //private double _zRotation;
-    //private double _fillAmount;
-    //public double ZRotation
-    //{
-    //    get
-    //    {
-    //        _zRotation = Math.Round(_zRotation, 3);
-    //        return _zRotation;
-    //    }
-    //    set => _zRotation = value;
-    //}
+    [SerializeField] private TMP_Text _idText;
 
-    //public double FillAmount
-    //{
-    //    get
-    //    {
-    //        _fillAmount = Math.Round(_fillAmount, 3);
-    //        return _fillAmount;
-    //    }
-    //    set => _fillAmount = value;
-    //}
+    public TMP_Text IdText
+    {
+        get => _idText;
+        set => _idText = value;
+    }
+
+    public void SetText(string id)
+    {
+        IdText.text = id;
+    }
 }
