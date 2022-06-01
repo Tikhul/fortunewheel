@@ -34,7 +34,7 @@ public class RotationController : FortuneWheelElement
  //    От старта до максимальной скорости
     {
         Tweener startTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, -Calculations.RotationToMax()), Game.Model.RotationModel.TimeToMax, RotateMode.FastBeyond360)
+            new Vector3(0, 0, -Calculations.RotationToMax()), Game.Model.WheelModel.RotationSO.TimeToMax, RotateMode.FastBeyond360)
             .SetRelative(true)
             .SetEase(Ease.InSine);
 
@@ -44,7 +44,7 @@ public class RotationController : FortuneWheelElement
  // Вращение на максимальной скорости
     {
         Tweener middleTween = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, -Calculations.RotationAtMax()), Game.Model.RotationModel.TimeAtMax, RotateMode.FastBeyond360)
+            new Vector3(0, 0, -Calculations.RotationAtMax()), Game.Model.WheelModel.RotationSO.TimeAtMax, RotateMode.FastBeyond360)
             .SetRelative(true)
             .SetEase(Ease.Linear);
         return middleTween;

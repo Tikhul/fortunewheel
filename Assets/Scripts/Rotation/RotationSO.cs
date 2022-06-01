@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "RotationScriptableObject", menuName = "ScriptableObjects/RotationSO", order = 1)]
 
-public class RotationModel : FortuneWheelElement
+public class RotationSO : ScriptableObject
 {
     [SerializeField] private float _timeToMax; // Время разгона
     [SerializeField] private float _timeAtMax; // Время на макс раскрутке

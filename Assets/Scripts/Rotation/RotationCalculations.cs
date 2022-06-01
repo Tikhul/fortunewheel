@@ -8,31 +8,31 @@ public class RotationCalculations : FortuneWheelElement
     public float Acceleration()
 // –асчет ускорени€ от нул€ до максимальной скорости
     {
-        return Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeToMax;
+        return Game.Model.WheelModel.RotationSO.MaxSpeed / Game.Model.WheelModel.RotationSO.TimeToMax;
     }
     
     public float RotationToMax()
 // –асчет градусов поворота от нул€ до максимальной скорости
     {
-        return (Acceleration() * Game.Model.RotationModel.TimeToMax * Game.Model.RotationModel.TimeToMax) / 2;
+        return (Acceleration() * Game.Model.WheelModel.RotationSO.TimeToMax * Game.Model.WheelModel.RotationSO.TimeToMax) / 2;
     }
     
     public float RotationAtMax()
  // –асчет градусов поворота на максимальной скорости
     {
-        return Game.Model.RotationModel.MaxSpeed * Game.Model.RotationModel.TimeAtMax;
+        return Game.Model.WheelModel.RotationSO.MaxSpeed * Game.Model.WheelModel.RotationSO.TimeAtMax;
     }
 
     public float Deceleration()
  // –асчет замедлени€ от максимальной скорости до нул€
     {
-        return Game.Model.RotationModel.MaxSpeed / Game.Model.RotationModel.TimeAfterMax;
+        return Game.Model.WheelModel.RotationSO.MaxSpeed / Game.Model.WheelModel.RotationSO.TimeAfterMax;
     }
     
     public float TotalRotationToStop()
  // –асчет общих градусов поворота до остановки
     {
-        return (float)Math.Floor((Deceleration() * Game.Model.RotationModel.TimeAfterMax * Game.Model.RotationModel.TimeAfterMax) / 2);
+        return (float)Math.Floor((Deceleration() * Game.Model.WheelModel.RotationSO.TimeAfterMax * Game.Model.WheelModel.RotationSO.TimeAfterMax) / 2);
     }
     // –асчет градусов поворота на 360 после замедлени€
 
@@ -45,13 +45,13 @@ public class RotationCalculations : FortuneWheelElement
     public float FinalFullTime()
  // –асчет времени вращени€ на 360 после замедлени€
     {
-        return (float)(Game.Model.RotationModel.TimeAfterMax - Math.Sqrt(2 * TotalRotationToStop() / Deceleration()));
+        return (float)(Game.Model.WheelModel.RotationSO.TimeAfterMax - Math.Sqrt(2 * TotalRotationToStop() / Deceleration()));
     }
 
     public float FinalExtraTime()
 // –асчет времени поворота, оставшегос€ до победител€
     {
-        return Game.Model.RotationModel.TimeAfterMax - FinalFullTime();
+        return Game.Model.WheelModel.RotationSO.TimeAfterMax - FinalFullTime();
     }
     public float RotationToWinner()
 // –асчет поворота, оставшегос€ до победител€

@@ -10,6 +10,7 @@ public class WheelModel : FortuneWheelElement
     private int _probabilitySum;
     private int _actualWinnerId;
     private Dictionary<int, List<int>> _probabilityRanges = new Dictionary<int, List<int>>(); // Собираю отрезки вероятности выпадения
+    [SerializeField] RotationSO _rotationSO;
     [SerializeField] private GameObject _arrow;
     [SerializeField] private GameObject _sectorsParent;
     [SerializeField] private List<SectorSO> _sectors;
@@ -17,6 +18,11 @@ public class WheelModel : FortuneWheelElement
     [SerializeField] private int _receivedWinnerId;
     [SerializeField] private bool _randomWinner = true;
 
+    public RotationSO RotationSO
+    {
+        get => _rotationSO;
+        set => _rotationSO = value;
+    }
     public List<SectorView> SectorViews
     {
         get => _sectorViews;
