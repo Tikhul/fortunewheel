@@ -956,6 +956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4abf8b5c257bf43b591789fd80d622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _arrow: {fileID: 1884008211}
   _sectorsParent: {fileID: 912700772}
   _sectors:
   - {fileID: 11400000, guid: 4121e20ae3a14184ba1599a76083949d, type: 2}
@@ -991,16 +992,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884008211}
-  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.120159805, y: -0.0070692203, z: 0.0008556576, w: 0.992729}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1947142813}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
+  m_LocalEulerAnglesHint: {x: 13.803, y: -0.816, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 156}
+  m_AnchoredPosition: {x: 0, y: -140.99854}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884008213
@@ -1277,4 +1278,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e5d3c4fb231af4b94bbeac28c6f2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _calculations: {fileID: 0}
