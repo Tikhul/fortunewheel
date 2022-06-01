@@ -24,7 +24,7 @@ public class WheelController : FortuneWheelElement
         }
     }
 
-    public void CollectSectorInfo(int id, float rotationZ, float rotationStep)
+    public void CollectSectorInfo(int id, float rotationZ)
 // —ловарь в формате <Id сектора : [начальный градус, конечный градус]>
     {
         List<float> tempList = new List<float>();
@@ -32,12 +32,6 @@ public class WheelController : FortuneWheelElement
         tempList.Add(rotationZ - (360-Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) + 10);
         Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
  //       Debug.Log(id.ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
-    }
-
-    public void CollectProbabilityInfo(int sectorProbability)
-// —бор всех чисел веро€тности
-    {
-        Game.Model.WheelModel.ProbabilitySum += sectorProbability;
     }
 
     public void CollectProbabilityRanges(int id, int sectorProbability)
@@ -51,6 +45,7 @@ public class WheelController : FortuneWheelElement
                 firstList.Add(0);
                 firstList.Add(sectorProbability);
                 Game.Model.WheelModel.ProbabilityRanges.Add(id, firstList);
+                Game.Model.WheelModel.ProbabilitySum += sectorProbability;
             }
             else
             {
@@ -58,6 +53,7 @@ public class WheelController : FortuneWheelElement
                 tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + 1);
                 tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + sectorProbability);
                 Game.Model.WheelModel.ProbabilityRanges.Add(id, tempList);
+                Game.Model.WheelModel.ProbabilitySum += sectorProbability;
             }
         }
     }

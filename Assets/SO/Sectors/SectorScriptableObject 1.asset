@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SectorScriptableObject 1
   m_EditorClassIdentifier: 
   _id: 1
-  _probability: 0
+  _probability: 1
   _sourceImage: {fileID: 21300000, guid: 2e4dd3a6ed4f74e4392c9f1e3b2662f5, type: 3}
