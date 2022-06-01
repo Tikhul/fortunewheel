@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class WheelController : FortuneWheelElement
 {
-    private Dictionary<int, List<float>> tempDict = new Dictionary<int, List<float>>();
     private void Start()
     {
         CreateWheel();
@@ -25,40 +24,14 @@ public class WheelController : FortuneWheelElement
         }
     }
 
-    public void CollectTemporarySectorInfo(int id, float initZ, float finalZ)
-// Словарь в формате <Id сектора : [начальный градус, конечный градус]> (локальный поворот для детей)
+    public void CollectSectorInfo(int id, float rotationZ, float rotationStep)
+// Словарь в формате <Id сектора : [начальный градус, конечный градус]>
     {
         List<float> tempList = new List<float>();
-        tempList.Add(initZ);
-        tempList.Add(finalZ);
-        tempDict.Add(id, tempList);
-        if(tempDict.Count == Game.Model.WheelModel.Sectors.Count)
-        {
-            CollectCorrectSectorInfo();
-        }
-    }
-
-    private void CollectCorrectSectorInfo()
-    {
-        for (int i=0; i < tempDict.Count; i++)
-        {
-            if(i == 0)
-            {
-                List<float> tempList = new List<float>();
-                tempList.Add(tempDict.Values.ToList()[i][0] + tempDict.Values.ToList()[i][1] - 180);
-                tempList.Add(tempDict.Values.ToList()[i][0] - 180);
-                Game.Model.WheelModel.SectorsInfo.Add(tempDict.Keys.ToList()[i], tempList);
-                Debug.Log(tempDict.Keys.ToList()[i].ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
-            }
-            else
-            {
-                List<float> tempList = new List<float>();
-                tempList.Add(Game.Model.WheelModel.SectorsInfo.Values.ToList()[i - 1][1]);
-                tempList.Add(tempList[0] - tempDict.Values.ToList()[i][0]);
-                Game.Model.WheelModel.SectorsInfo.Add(tempDict.Keys.ToList()[i], tempList);
-                Debug.Log(tempDict.Keys.ToList()[i].ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
-            }
-        }
+        tempList.Add(rotationZ - 180 - 10);
+        tempList.Add(rotationZ + rotationStep - 180 + 10);
+        Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
+ //       Debug.Log(id.ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
     }
 
     public void CollectProbabilityInfo(int sectorProbability)
@@ -122,6 +95,7 @@ public class WheelController : FortuneWheelElement
         {
             Game.Model.WheelModel.ActualWinnerId = Game.Model.WheelModel.Sectors
                 [UnityEngine.Random.Range(0, Game.Model.WheelModel.Sectors.Count)].Id;
+            Debug.Log(Game.Model.WheelModel.ActualWinnerId);
         }   
     }
 

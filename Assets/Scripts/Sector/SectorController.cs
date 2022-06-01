@@ -18,7 +18,7 @@ public class SectorController : FortuneWheelElement
         newSector.fillAmount = (float)Math.Round((double)1 / Game.Model.WheelModel.Sectors.Count, 3);
         newSector.GetComponent<SectorView>().SetText(Game.Model.WheelModel.Sectors[index].Id.ToString());
 
-        Game.Controller.WheelController.CollectTemporarySectorInfo(Game.Model.WheelModel.Sectors[index].Id, zRotation, zRotation + rotationStep);
+        Game.Controller.WheelController.CollectSectorInfo(Game.Model.WheelModel.Sectors[index].Id, newSector.transform.parent.rotation.z - newSector.transform.localEulerAngles.z, rotationStep);
         Game.Controller.WheelController.CollectProbabilityInfo(Game.Model.WheelModel.Sectors[index].Probability);
         Game.Controller.WheelController.CollectProbabilityRanges(Game.Model.WheelModel.Sectors[index].Id, Game.Model.WheelModel.Sectors[index].Probability);
     }
