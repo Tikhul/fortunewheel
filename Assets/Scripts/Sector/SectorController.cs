@@ -15,9 +15,17 @@ public class SectorController : FortuneWheelElement
         Game.Controller.WheelController.CollectSectorInfo(Game.Model.WheelModel.Sectors[index].Id, newSector.transform.parent.rotation.z - newSector.transform.localEulerAngles.z);
         Game.Controller.WheelController.CollectProbabilityRanges(Game.Model.WheelModel.Sectors[index].Id, Game.Model.WheelModel.Sectors[index].Probability);
     }
+
+    public void LaunchSectorTurnOff()
+    {
+        foreach (SectorView s in Game.Model.WheelModel.SectorViews)
+        {
+            s.TurnOffSector();
+        }
+
+    }
     public void LaunchSectorHighlight()
     {
-        Debug.Log("LaunchSectorHighlight");
         foreach (SectorView s in Game.Model.WheelModel.SectorViews)
         {
             s.HighlightSector(Game.Model.WheelModel.ActualWinnerId);

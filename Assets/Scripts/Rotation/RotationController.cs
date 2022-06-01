@@ -18,6 +18,7 @@ public class RotationController : FortuneWheelElement
     public void CollectSequence(Sequence rotationSequence)
 // Заполнение очереди анимаций
     {
+        Game.Controller.SectorController.LaunchSectorTurnOff();
         rotationSequence.Append(StartWheel());
         rotationSequence.Append(MiddleWheel());
         rotationSequence.Append(FinalWheel());

@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class SectorView : FortuneWheelElement
 {
     private int sectorId;
+    private bool isHighlighted = false;
+    private float transparent = 0.3f;
+    private float highlighted = 1.0f;
     [SerializeField] private TMP_Text _idText;
 
     public TMP_Text IdText
@@ -36,7 +39,7 @@ public class SectorView : FortuneWheelElement
     {
         newSector.sprite = Game.Model.WheelModel.Sectors[index].SourceImage;
         Color tmp = newSector.color;
-        tmp.a = 0.3f;
+        tmp.a = transparent;
         newSector.color = tmp;
         newSector.fillAmount = (float)Math.Round((double)1 / Game.Model.WheelModel.Sectors.Count, 3);
     }
@@ -44,14 +47,24 @@ public class SectorView : FortuneWheelElement
     {
         IdText.text = sectorId.ToString();
     }
-
     public void HighlightSector(int receivedId)
     {
         if (receivedId.Equals(sectorId))
         {
             Color tmp = GetComponent<Image>().color;
-            tmp.a = 1.0f;
+            tmp.a = highlighted;
             GetComponent<Image>().color = tmp;
+            isHighlighted = true;
+        }
+    }
+    public void TurnOffSector()
+    {
+        if (isHighlighted)
+        {
+            Color tmp = GetComponent<Image>().color;
+            tmp.a = transparent;
+            GetComponent<Image>().color = tmp;
+            isHighlighted = true;
         }
     }
 }
