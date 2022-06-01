@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class WheelController : FortuneWheelElement
 {
+    private Dictionary<int, List<float>> tempDict = new Dictionary<int, List<float>>();
     private void Start()
     {
         CreateWheel();
@@ -14,8 +15,8 @@ public class WheelController : FortuneWheelElement
     private void CreateWheel()
  // Создание колеса
     {
-        double initialRotation = 0;
-        double rotationStep = Math.Round((double)360 / Game.Model.WheelModel.Sectors.Count, 3);
+        float initialRotation = 0;
+        float rotationStep = (float)Math.Round((double)360 / Game.Model.WheelModel.Sectors.Count, 3);
 
         for (int i = 0; i < Game.Model.WheelModel.Sectors.Count; i++)
         {
@@ -24,14 +25,40 @@ public class WheelController : FortuneWheelElement
         }
     }
 
-    public void CollectSectorInfo(int id, double initZ, double finalZ)
-// Словарь в формате <Id сектора : [начальный градус, конечный градус]>
+    public void CollectTemporarySectorInfo(int id, float initZ, float finalZ)
+// Словарь в формате <Id сектора : [начальный градус, конечный градус]> (локальный поворот для детей)
     {
-        List<double> tempList = new List<double>();
+        List<float> tempList = new List<float>();
         tempList.Add(initZ);
         tempList.Add(finalZ);
-        Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
-//     Debug.Log(id.ToString() + " " + initZ.ToString() + " " + finalZ.ToString());
+        tempDict.Add(id, tempList);
+        if(tempDict.Count == Game.Model.WheelModel.Sectors.Count)
+        {
+            CollectCorrectSectorInfo();
+        }
+    }
+
+    private void CollectCorrectSectorInfo()
+    {
+        for (int i=0; i < tempDict.Count; i++)
+        {
+            if(i == 0)
+            {
+                List<float> tempList = new List<float>();
+                tempList.Add(tempDict.Values.ToList()[i][0] + tempDict.Values.ToList()[i][1] - 180);
+                tempList.Add(tempDict.Values.ToList()[i][0] - 180);
+                Game.Model.WheelModel.SectorsInfo.Add(tempDict.Keys.ToList()[i], tempList);
+                Debug.Log(tempDict.Keys.ToList()[i].ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
+            }
+            else
+            {
+                List<float> tempList = new List<float>();
+                tempList.Add(Game.Model.WheelModel.SectorsInfo.Values.ToList()[i - 1][1]);
+                tempList.Add(tempList[0] - tempDict.Values.ToList()[i][0]);
+                Game.Model.WheelModel.SectorsInfo.Add(tempDict.Keys.ToList()[i], tempList);
+                Debug.Log(tempDict.Keys.ToList()[i].ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
+            }
+        }
     }
 
     public void CollectProbabilityInfo(int sectorProbability)
@@ -51,7 +78,6 @@ public class WheelController : FortuneWheelElement
                 firstList.Add(0);
                 firstList.Add(sectorProbability);
                 Game.Model.WheelModel.ProbabilityRanges.Add(id, firstList);
-  //              Debug.Log(firstList[0].ToString() + firstList[1].ToString());
             }
             else
             {
@@ -59,7 +85,6 @@ public class WheelController : FortuneWheelElement
                 tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + 1);
                 tempList.Add(Game.Model.WheelModel.ProbabilityRanges.Values.Last()[1] + sectorProbability);
                 Game.Model.WheelModel.ProbabilityRanges.Add(id, tempList);
-                //            Debug.Log(id.ToString() + tempList[0].ToString() + tempList[1].ToString());
             }
         }
     }

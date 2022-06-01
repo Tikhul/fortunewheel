@@ -66,7 +66,7 @@ public class RotationController : FortuneWheelElement
 // Докручивание до победителя
     {
         Tweener finalExtra = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, -Calculations.RotationToWinner()), Calculations.FinalExtraTime(), RotateMode.FastBeyond360)
+            new Vector3(0, 0, Calculations.RotationToWinner()), Calculations.FinalExtraTime(), RotateMode.FastBeyond360)
             .SetRelative(false);
         return finalExtra;
     }

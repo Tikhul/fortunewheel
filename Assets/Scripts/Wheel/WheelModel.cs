@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class WheelModel : FortuneWheelElement
 {
-    private Dictionary<int, List<double>> _sectorsInfo = new Dictionary<int, List<double>>();
+    private Dictionary<int, List<float>> _sectorsInfo = new Dictionary<int, List<float>>();
     private int _probabilitySum;
     private int _actualWinnerId;
     private Dictionary<int, List<int>> _probabilityRanges = new Dictionary<int, List<int>>(); // Собираю отрезки вероятности выпадения
@@ -20,7 +20,7 @@ public class WheelModel : FortuneWheelElement
         get => _sectorsParent;
         set => _sectorsParent = value;
     }
-    public Dictionary<int, List<double>> SectorsInfo
+    public Dictionary<int, List<float>> SectorsInfo
     {
         get => _sectorsInfo;
         set => _sectorsInfo = value;

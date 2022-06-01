@@ -56,9 +56,9 @@ public class RotationCalculations : FortuneWheelElement
     public float RotationToWinner()
 // –асчет поворота, оставшегос€ до победител€
     {
-        List<double> degrees = Game.Model.WheelModel.SectorsInfo[Game.Model.WheelModel.ActualWinnerId];
-        float maxDegree = (float)(degrees[0] - 180);
-        float minDegree = (float)(degrees[1] - 180);
-        return UnityEngine.Random.Range(minDegree, maxDegree);
+        List<float> degrees = Game.Model.WheelModel.SectorsInfo[Game.Model.WheelModel.ActualWinnerId];
+        float maxDegree = (float)(degrees[1] - 180);
+        float minDegree = (float)(degrees[0] - 180);
+        return UnityEngine.Random.Range(degrees[0], degrees[1]);
     }
 }
