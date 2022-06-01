@@ -6,12 +6,21 @@ using UnityEngine.UI;
 
 public class SectorController : FortuneWheelElement
 {
-    public void SetUpSector(float rotationStep, float zRotation, int index)
-// Создание и настройка сектора
+    public void CreateSector(float zRotation, int index)
+    // Создание и настройка сектора
     {
         Image newSector = Instantiate(Game.Model.WheelModel.SectorPrefab);
         newSector.GetComponent<SectorView>().SetUpSector(newSector, zRotation, index);
+        Game.Model.WheelModel.SectorViews.Add(newSector.GetComponent<SectorView>());
         Game.Controller.WheelController.CollectSectorInfo(Game.Model.WheelModel.Sectors[index].Id, newSector.transform.parent.rotation.z - newSector.transform.localEulerAngles.z);
         Game.Controller.WheelController.CollectProbabilityRanges(Game.Model.WheelModel.Sectors[index].Id, Game.Model.WheelModel.Sectors[index].Probability);
+    }
+    public void LaunchSectorHighlight()
+    {
+        Debug.Log("LaunchSectorHighlight");
+        foreach (SectorView s in Game.Model.WheelModel.SectorViews)
+        {
+            s.HighlightSector(Game.Model.WheelModel.ActualWinnerId);
+        }
     }
 }

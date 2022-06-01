@@ -21,6 +21,14 @@ public class RotationController : FortuneWheelElement
         rotationSequence.Append(StartWheel());
         rotationSequence.Append(MiddleWheel());
         rotationSequence.Append(FinalWheel());
+        StartCoroutine(AfterSequence(rotationSequence));
+    }
+
+    IEnumerator AfterSequence(Sequence rotationSequence)
+    {
+        Debug.Log("AfterSequence");
+        yield return rotationSequence.WaitForCompletion();
+        Game.Controller.SectorController.LaunchSectorHighlight();
     }
     private Tweener StartWheel()
  //    От старта до максимальной скорости
@@ -29,6 +37,7 @@ public class RotationController : FortuneWheelElement
             new Vector3(0, 0, -Calculations.RotationToMax()), Game.Model.RotationModel.TimeToMax, RotateMode.FastBeyond360)
             .SetRelative(true)
             .SetEase(Ease.InSine);
+
         return startTween;
     }
     private Tweener MiddleWheel()
@@ -70,5 +79,4 @@ public class RotationController : FortuneWheelElement
             .SetRelative(false);
         return finalExtra;
     }
-    
 }

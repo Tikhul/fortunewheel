@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class WheelModel : FortuneWheelElement
 {
+    private List<SectorView> _sectorViews = new List<SectorView>();
     private Dictionary<int, List<float>> _sectorsInfo = new Dictionary<int, List<float>>();
     private int _probabilitySum;
     private int _actualWinnerId;
@@ -16,6 +17,11 @@ public class WheelModel : FortuneWheelElement
     [SerializeField] private int _receivedWinnerId;
     [SerializeField] private bool _randomWinner = true;
 
+    public List<SectorView> SectorViews
+    {
+        get => _sectorViews;
+        set => _sectorViews = value;
+    }
     public GameObject Arrow
     {
         get => _arrow;

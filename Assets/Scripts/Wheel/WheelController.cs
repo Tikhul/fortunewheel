@@ -19,7 +19,7 @@ public class WheelController : FortuneWheelElement
 
         for (int i = 0; i < Game.Model.WheelModel.Sectors.Count; i++)
         {
-            Game.Controller.SectorController.SetUpSector(rotationStep, initialRotation, i);
+            Game.Controller.SectorController.CreateSector(initialRotation, i);
             initialRotation += rotationStep;
         }
     }
