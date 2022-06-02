@@ -65,6 +65,7 @@ public class RotationController : FortuneWheelElement
     private Tweener FinalFullRotations()
 // Основные (полные) повороты до остановки
     {
+        Debug.Log(Calculations.FinalFullTime());
         Tweener finalFull = Game.Model.WheelModel.SectorsParent.transform.DORotate(
             new Vector3(0, 0, -Calculations.FinalFullRotations()), Calculations.FinalFullTime(), RotateMode.FastBeyond360)
             .SetRelative(true);
@@ -74,6 +75,8 @@ public class RotationController : FortuneWheelElement
     private Tweener FinalExtraRotations()
 // Докручивание до победителя
     {
+        Debug.Log(Calculations.FinalExtraTime());
+        Debug.Log(Calculations.RotationToWinner());
         Tweener finalExtra = Game.Model.WheelModel.SectorsParent.transform.DORotate(
             new Vector3(0, 0, Calculations.RotationToWinner()), Calculations.FinalExtraTime(), RotateMode.FastBeyond360)
             .SetRelative(false);

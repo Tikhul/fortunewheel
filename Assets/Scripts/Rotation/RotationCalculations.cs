@@ -41,18 +41,17 @@ public class RotationCalculations : FortuneWheelElement
         return TotalRotationToStop() - (TotalRotationToStop() % 360);
     }
 
-    
     public float FinalFullTime()
  // –асчет времени вращени€ на 360 после замедлени€
     {
-        float coef =  RotationToWinner() / FinalFullRotations();
-        return (float)(Game.Model.WheelModel.RotationSO.TimeAfterMax) * coef;
+        Debug.Log(FinalFullRotations());
+        return (float)Math.Sqrt((2 * FinalFullRotations()) / Deceleration());
     }
 
     public float FinalExtraTime()
 // –асчет времени поворота, оставшегос€ до победител€
     {
-        return Game.Model.WheelModel.RotationSO.TimeAfterMax - FinalFullTime();
+        return (float)Math.Sqrt((TotalRotationToStop() - FinalFullRotations()) * 2 / Deceleration());
     }
     public float RotationToWinner()
 // –асчет поворота, оставшегос€ до победител€
