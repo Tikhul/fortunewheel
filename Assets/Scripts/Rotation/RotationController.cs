@@ -27,7 +27,6 @@ public class RotationController : FortuneWheelElement
 
     IEnumerator AfterSequence(Sequence rotationSequence)
     {
-        Debug.Log("AfterSequence");
         yield return rotationSequence.WaitForCompletion();
         Game.Controller.SectorController.LaunchSectorHighlight();
     }
