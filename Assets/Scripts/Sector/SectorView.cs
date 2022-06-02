@@ -13,6 +13,7 @@ public class SectorView : FortuneWheelElement
     private float transparent = 0.3f;
     private float highlighted = 1.0f;
     private float fadeTime = 1.5f;
+    private float textRadius = 1.6f;
     
     [SerializeField] private TMP_Text _idText;
 
@@ -50,8 +51,14 @@ public class SectorView : FortuneWheelElement
     private void SetText(float rotationStep)
     {
         IdText.transform.localRotation = Quaternion.Euler(0, 0, -rotationStep * 0.5f);
-        IdText.transform.Translate(VectorFromAngle(rotationStep * 0.5f));
+        float angle = (float)ConvertDegreesToRadians(rotationStep);
+        IdText.transform.Translate(VectorFromAngle(-angle));
         IdText.text = sectorId.ToString();
+    }
+
+    private double ConvertDegreesToRadians(double degrees)
+    {
+        return (Math.PI / 180) * degrees;
     }
 
     private Vector2 VectorFromAngle(float theta)
