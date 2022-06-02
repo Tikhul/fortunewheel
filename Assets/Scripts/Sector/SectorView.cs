@@ -13,7 +13,9 @@ public class SectorView : FortuneWheelElement
     private float transparent = 0.3f;
     private float highlighted = 1.0f;
     private float fadeTime = 1.5f;
+    
     [SerializeField] private TMP_Text _idText;
+
 
     public TMP_Text IdText
     {
@@ -21,13 +23,13 @@ public class SectorView : FortuneWheelElement
         set => _idText = value;
     }
 
-    public void SetUpSector(Image newSector, float zRotation, int index)
+    public void SetUpSector(Image newSector, float zRotation, int index, float rotationStep)
     {
         sectorId = Game.Model.WheelModel.Sectors[index].Id;
         
         SetTransform(newSector, zRotation);
         SetColor(newSector, index);
-        SetText(index);
+        SetText(rotationStep);
     }
 
     private void SetTransform(Image newSector, float zRotation)
@@ -45,9 +47,16 @@ public class SectorView : FortuneWheelElement
         newSector.color = tmp;
         newSector.fillAmount = (float)Math.Round((double)1 / Game.Model.WheelModel.Sectors.Count, 3);
     }
-    private void SetText(int index)
+    private void SetText(float rotationStep)
     {
+        IdText.transform.localRotation = Quaternion.Euler(0, 0, -rotationStep * 0.5f);
+        IdText.transform.Translate(VectorFromAngle(rotationStep * 0.5f));
         IdText.text = sectorId.ToString();
+    }
+
+    private Vector2 VectorFromAngle(float theta)
+    {
+        return new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
     }
     public void HighlightSector(int receivedId)
     {

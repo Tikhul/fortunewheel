@@ -964,6 +964,7 @@ MonoBehaviour:
   _sectorPrefab: {fileID: 2062419159778194161, guid: 555229b529f60f04a9d58f54d5b6206b, type: 3}
   _receivedWinnerId: 1
   _randomWinner: 0
+  _wheelCenter: {fileID: 0}
 --- !u!1 &1884008211
 GameObject:
   m_ObjectHideFlags: 0

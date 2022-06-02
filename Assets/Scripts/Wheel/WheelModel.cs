@@ -17,7 +17,12 @@ public class WheelModel : FortuneWheelElement
     [SerializeField] private Image _sectorPrefab;
     [SerializeField] private int _receivedWinnerId;
     [SerializeField] private bool _randomWinner = true;
-
+    [SerializeField] private GameObject _wheelCenter;
+    public GameObject WheelCenter
+    {
+        get => _wheelCenter;
+        set => _wheelCenter = value;
+    }
     public RotationSO RotationSO
     {
         get => _rotationSO;

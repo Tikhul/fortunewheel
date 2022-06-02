@@ -10,7 +10,7 @@ public class SectorController : FortuneWheelElement
     // Создание и настройка сектора
     {
         Image newSector = Instantiate(Game.Model.WheelModel.SectorPrefab);
-        newSector.GetComponent<SectorView>().SetUpSector(newSector, zRotation, index);
+        newSector.GetComponent<SectorView>().SetUpSector(newSector, zRotation, index, rotationStep);
         Game.Model.WheelModel.SectorViews.Add(newSector.GetComponent<SectorView>());
         Game.Controller.WheelController.CollectSectorInfo(Game.Model.WheelModel.Sectors[index].Id, newSector.transform.parent.rotation.z - newSector.transform.localEulerAngles.z, rotationStep);
         Game.Controller.WheelController.CollectProbabilityRanges(Game.Model.WheelModel.Sectors[index].Id, Game.Model.WheelModel.Sectors[index].Probability);
