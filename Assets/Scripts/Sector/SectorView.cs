@@ -33,6 +33,7 @@ public class SectorView : FortuneWheelElement
     }
 
     private void SetTransform(Image newSector, float zRotation)
+// Настройка расположения сектора
     {
         newSector.transform.SetParent(Game.Model.WheelModel.SectorsParent.transform);
         newSector.transform.localScale = new Vector3(1, 1, 1);
@@ -40,6 +41,7 @@ public class SectorView : FortuneWheelElement
         newSector.transform.localRotation = Quaternion.Euler(0, 0, zRotation);
     }
     private void SetColor(Image newSector, int index)
+// Настройка цвета и спрайта
     {
         newSector.sprite = Game.Model.WheelModel.Sectors[index].SourceImage;
         Color tmp = newSector.color;
@@ -48,12 +50,19 @@ public class SectorView : FortuneWheelElement
         newSector.fillAmount = (float)Math.Round((double)1 / Game.Model.WheelModel.Sectors.Count, 3);
     }
     private void SetText(float rotationStep)
+// Настройка текста внутри сектора
     {
+        Vector3 pos = new Vector3();
+        pos.x = Game.Model.WheelModel.WheelCenter.transform.localPosition.x - Game.Model.WheelModel.Radius * Mathf.Sin(rotationStep * Mathf.Deg2Rad / 2);
+        pos.y = Game.Model.WheelModel.WheelCenter.transform.localPosition.y - Game.Model.WheelModel.Radius * Mathf.Cos(rotationStep * Mathf.Deg2Rad / 2);
+        pos.z = Game.Model.WheelModel.WheelCenter.transform.localPosition.z;
+        IdText.transform.localPosition = pos;
         IdText.transform.localRotation = Quaternion.Euler(0, 0, -rotationStep * 0.5f);
         IdText.text = sectorId.ToString();
     }
 
     public void HighlightSector(int receivedId)
+// Подсветить сектор
     {
         if (receivedId.Equals(sectorId))
         {
@@ -63,6 +72,7 @@ public class SectorView : FortuneWheelElement
         }
     }
     public void TurnOffSector()
+ // Убрать подсветку сектора
     {
         if (isHighlighted)
         {

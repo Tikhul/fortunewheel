@@ -22,19 +22,6 @@ public class WheelController : FortuneWheelElement
             Game.Controller.SectorController.CreateSector(initialRotation, i, rotationStep);
             initialRotation += rotationStep;
         }
-        AlignSectorTexts(rotationStep);
-    }
-
-    private void AlignSectorTexts(float rotationStep)
-    {
-        Vector3 pos = new Vector3();
-        pos.x = Game.Model.WheelModel.WheelCenter.transform.localPosition.x - Game.Model.WheelModel.Radius * Mathf.Sin(rotationStep * Mathf.Deg2Rad /2);
-        pos.y = Game.Model.WheelModel.WheelCenter.transform.localPosition.y - Game.Model.WheelModel.Radius * Mathf.Cos(rotationStep * Mathf.Deg2Rad /2);
-        pos.z = Game.Model.WheelModel.WheelCenter.transform.localPosition.z;
-        for (int i=0; i < Game.Model.WheelModel.SectorViews.Count; i++)
-        {
-            Game.Model.WheelModel.SectorViews[i].IdText.transform.localPosition = pos;
-        }
     }
     public void CollectSectorInfo(int id, float rotationZ, float rotationStep)
 // Словарь в формате <Id сектора : [начальный градус, конечный градус]>
