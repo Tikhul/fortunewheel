@@ -479,7 +479,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1237697198}
   m_Father: {fileID: 1947142813}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -866,6 +867,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1237697197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1237697198}
+  m_Layer: 0
+  m_Name: WheelCenter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1237697198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237697197}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 912700773}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1548592913
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,14 +989,14 @@ MonoBehaviour:
   _sectors:
   - {fileID: 11400000, guid: 4121e20ae3a14184ba1599a76083949d, type: 2}
   - {fileID: 11400000, guid: 7311950f9c5eced42b31936d0a53fa76, type: 2}
-  - {fileID: 11400000, guid: 8d66b3a3264f2ac4e84b60551c8cbc91, type: 2}
   - {fileID: 11400000, guid: eeb053ed56bd04346912629290e9f4e5, type: 2}
   - {fileID: 11400000, guid: 7d074be16c7ba0945a65144384505549, type: 2}
   - {fileID: 11400000, guid: 37bb12bdc61b33145a6e113ad1b0c73b, type: 2}
+  - {fileID: 11400000, guid: 8f7e3b96a23b06c4b9529a5e865396d8, type: 2}
   _sectorPrefab: {fileID: 2062419159778194161, guid: 555229b529f60f04a9d58f54d5b6206b, type: 3}
   _receivedWinnerId: 1
   _randomWinner: 0
-  _wheelCenter: {fileID: 0}
+  _wheelCenter: {fileID: 1237697197}
 --- !u!1 &1884008211
 GameObject:
   m_ObjectHideFlags: 0
