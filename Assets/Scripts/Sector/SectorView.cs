@@ -13,7 +13,6 @@ public class SectorView : FortuneWheelElement
     private float transparent = 0.3f;
     private float highlighted = 1.0f;
     private float fadeTime = 1.5f;
-    private float textRadius = 1.6f;
     
     [SerializeField] private TMP_Text _idText;
 
@@ -51,26 +50,16 @@ public class SectorView : FortuneWheelElement
     private void SetText(float rotationStep)
     {
         IdText.transform.localRotation = Quaternion.Euler(0, 0, -rotationStep * 0.5f);
-        float angle = (float)ConvertDegreesToRadians(rotationStep);
-        IdText.transform.Translate(VectorFromAngle(-angle));
         IdText.text = sectorId.ToString();
     }
 
-    private double ConvertDegreesToRadians(double degrees)
-    {
-        return (Math.PI / 180) * degrees;
-    }
-
-    private Vector2 VectorFromAngle(float theta)
-    {
-        return new Vector2(Mathf.Cos(theta), Mathf.Sin(theta));
-    }
     public void HighlightSector(int receivedId)
     {
         if (receivedId.Equals(sectorId))
         {
-            GetComponent<Image>().DOFade(highlighted, fadeTime);
+            Tween fading = GetComponent<Image>().DOFade(highlighted, fadeTime);
             isHighlighted = true;
+            fading.OnComplete(Game.View.StartButtonView.ActivateButton);
         }
     }
     public void TurnOffSector()

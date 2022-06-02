@@ -13,14 +13,13 @@ public class StartButtonView : FortuneWheelElement
 
     private void LaunchWheel()
     {
-        GetComponent<Button>().enabled = false;
+        GetComponent<Button>().interactable = false;
         Sequence rotationSequence = DOTween.Sequence();
         Game.Controller.RotationController.CollectSequence(rotationSequence);
-        rotationSequence.OnComplete(ActivateButton);
     }
 
     public void ActivateButton()
     {
-        GetComponent<Button>().enabled = true;
+        GetComponent<Button>().interactable = true;
     }
 }

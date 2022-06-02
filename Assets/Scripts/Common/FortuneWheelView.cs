@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class FortuneWheelView : MonoBehaviour
 {
-    //[SerializeField] private SectorView _sectorView;
+    [SerializeField] private StartButtonView _startButtonView;
 
-    //public SectorView SectorView
-    //{
-    //    get => _sectorView;
-    //    set => _sectorView = value;
-    //}
+    public StartButtonView StartButtonView
+    {
+        get => _startButtonView;
+        set => _startButtonView = value;
+    }
 }
