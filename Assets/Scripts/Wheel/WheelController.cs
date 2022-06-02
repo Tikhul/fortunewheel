@@ -19,17 +19,17 @@ public class WheelController : FortuneWheelElement
 
         for (int i = 0; i < Game.Model.WheelModel.Sectors.Count; i++)
         {
-            Game.Controller.SectorController.CreateSector(initialRotation, i);
+            Game.Controller.SectorController.CreateSector(initialRotation, i, rotationStep);
             initialRotation += rotationStep;
         }
     }
 
-    public void CollectSectorInfo(int id, float rotationZ)
+    public void CollectSectorInfo(int id, float rotationZ, float rotationStep)
 // Словарь в формате <Id сектора : [начальный градус, конечный градус]>
     {
         List<float> tempList = new List<float>();
         tempList.Add(rotationZ - (360-Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) + 10);
-        tempList.Add(rotationZ - (360-Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) + 10);
+        tempList.Add(rotationZ - (360- rotationStep - Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) - 10);
         Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
  //       Debug.Log(id.ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
     }
@@ -72,7 +72,6 @@ public class WheelController : FortuneWheelElement
     private void ChooseRandomWinner()
 // Выбор сектора-победителя в зависимости от вероятности выпадения
     {
-        Debug.Log("ChooseRandomWinner");
         int randWinner = UnityEngine.Random.Range(1, Game.Model.WheelModel.ProbabilitySum + 1);
 
         if (Game.Model.WheelModel.ProbabilityRanges.Count > 0)
@@ -82,7 +81,7 @@ public class WheelController : FortuneWheelElement
                 if (kvp.Value[0] <= randWinner && randWinner <= kvp.Value[1])
                 {
                     Game.Model.WheelModel.ActualWinnerId = kvp.Key;
-                    Debug.Log(kvp.Key);
+                    Debug.Log("Рандомный id победителя: " + kvp.Key.ToString());
                     break;
                 }
             }
@@ -91,14 +90,13 @@ public class WheelController : FortuneWheelElement
         {
             Game.Model.WheelModel.ActualWinnerId = Game.Model.WheelModel.Sectors
                 [UnityEngine.Random.Range(0, Game.Model.WheelModel.Sectors.Count)].Id;
-            Debug.Log(Game.Model.WheelModel.ActualWinnerId);
+            Debug.Log("Рандомный id победителя " + Game.Model.WheelModel.ActualWinnerId.ToString());
         }   
     }
 
     private void ChooseParticularWinner()
 // Назначение победителя по указанному id. Если id Некорректный, то победитель выбирается рандомно
     {
-        Debug.Log("ChooseParticularWinner");
         if (Game.Model.WheelModel.SectorsInfo.ContainsKey(Game.Model.WheelModel.ReceivedWinnerId))
         {
             Game.Model.WheelModel.ActualWinnerId = Game.Model.WheelModel.ReceivedWinnerId;

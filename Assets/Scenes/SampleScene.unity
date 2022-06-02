@@ -215,10 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5dbd0f198fbc542a33e504ff6fd3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToMax: 5
-  _timeAtMax: 2
-  _timeAfterMax: 5
-  _maxSpeed: 600
 --- !u!1 &677470275
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,7 +649,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wheelModel: {fileID: 1626974934}
-  _rotationModel: {fileID: 470381617}
 --- !u!4 &1089008850
 Transform:
   m_ObjectHideFlags: 0
@@ -956,6 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d4abf8b5c257bf43b591789fd80d622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rotationSO: {fileID: 11400000, guid: b7f1da67ad03a294eb47173f7003962b, type: 2}
   _arrow: {fileID: 1884008211}
   _sectorsParent: {fileID: 912700772}
   _sectors:
