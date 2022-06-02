@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SectorView : FortuneWheelElement
 {
@@ -11,6 +12,7 @@ public class SectorView : FortuneWheelElement
     private bool isHighlighted = false;
     private float transparent = 0.3f;
     private float highlighted = 1.0f;
+    private float fadeTime = 1.5f;
     [SerializeField] private TMP_Text _idText;
 
     public TMP_Text IdText
@@ -51,9 +53,7 @@ public class SectorView : FortuneWheelElement
     {
         if (receivedId.Equals(sectorId))
         {
-            Color tmp = GetComponent<Image>().color;
-            tmp.a = highlighted;
-            GetComponent<Image>().color = tmp;
+            GetComponent<Image>().DOFade(highlighted, fadeTime);
             isHighlighted = true;
         }
     }
@@ -61,9 +61,7 @@ public class SectorView : FortuneWheelElement
     {
         if (isHighlighted)
         {
-            Color tmp = GetComponent<Image>().color;
-            tmp.a = transparent;
-            GetComponent<Image>().color = tmp;
+            GetComponent<Image>().DOFade(transparent, fadeTime);
             isHighlighted = true;
         }
     }
