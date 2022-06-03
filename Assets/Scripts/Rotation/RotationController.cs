@@ -50,33 +50,14 @@ public class RotationController : FortuneWheelElement
         return middleTween;
     }
 
-    private Sequence FinalWheel()
-    // Замедление до нужного сектора
-    {
-        Game.Controller.WheelController.LaunchWinnerChoice(); // Выбор победителя
-        Sequence finalSequence = DOTween.Sequence();
-        finalSequence.Append(FinalFullRotations());
-        finalSequence.Append(FinalExtraRotations());
-        finalSequence.SetEase(Ease.OutSine);
-
-        return finalSequence;
-    }
-
-    private Tweener FinalFullRotations()
-// Основные (полные) повороты до остановки
-    {
-        Tweener finalFull = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, -Calculations.FinalFullRotations()), Calculations.FinalFullTime(), RotateMode.FastBeyond360)
-            .SetRelative(true);
-        return finalFull;
-    }
-
-    private Tweener FinalExtraRotations()
+    private Tweener FinalWheel()
 // Докручивание до победителя
     {
+        Game.Controller.WheelController.LaunchWinnerChoice();
         Tweener finalExtra = Game.Model.WheelModel.SectorsParent.transform.DORotate(
-            new Vector3(0, 0, Calculations.RotationToWinner()), Calculations.FinalExtraTime(), RotateMode.FastBeyond360)
-            .SetRelative(false);
+            new Vector3(0, 0, -Calculations.FinalFullRotations() + Calculations.RotationToWinner()), Game.Model.WheelModel.RotationSO.TimeAfterMax, RotateMode.FastBeyond360)
+            .SetRelative(false)
+            .SetEase(Ease.OutSine); 
         return finalExtra;
     }
 }

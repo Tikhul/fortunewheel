@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeToMax: 3
   _timeAtMax: 5
-  _timeAfterMax: 3
+  _timeAfterMax: 2
   _maxSpeed: 300

@@ -27,8 +27,8 @@ public class WheelController : FortuneWheelElement
 // Словарь в формате <Id сектора : [начальный градус, конечный градус]>
     {
         List<float> tempList = new List<float>();
-        tempList.Add(rotationZ - (360-Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) + 10);
-        tempList.Add(rotationZ - (360- rotationStep - Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) - 10);
+        tempList.Add(rotationZ + (Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) + 10);
+        tempList.Add(rotationZ + (rotationStep - Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) - 10);
         Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
  //       Debug.Log(id.ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
     }
