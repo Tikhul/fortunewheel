@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e597a78563c5e449e27796350058da, type: 3}
   m_Name: RotationScriptableObject
   m_EditorClassIdentifier: 
-  _timeToMax: 3
+  _timeToMax: 2
   _timeAtMax: 5
-  _timeAfterMax: 2
-  _maxSpeed: 300
+  _timeAfterMax: 3
+  _maxSpeed: 400

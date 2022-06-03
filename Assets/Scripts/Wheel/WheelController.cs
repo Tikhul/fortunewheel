@@ -28,7 +28,7 @@ public class WheelController : FortuneWheelElement
     {
         List<float> tempList = new List<float>();
         tempList.Add(rotationZ + (Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) + 10);
-        tempList.Add(rotationZ + (rotationStep - Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) - 10);
+        tempList.Add(rotationZ + (rotationStep + Game.Model.WheelModel.Arrow.transform.localEulerAngles.z) - 10);
         Game.Model.WheelModel.SectorsInfo.Add(id, tempList);
  //       Debug.Log(id.ToString() + " " + tempList[0].ToString() + " " + tempList[1].ToString());
     }
