@@ -15,3 +15,14 @@ In the Unity Inspector window, you can set up the following options:
 <li>Time until the roulette wheel stops after determining the element to select</li>
 <li>The ability to force the dropout of a specific element</li>
 </ul>
+
+The functionality of dropping certain sectors works regardless of the location of the arrow. The arrow can be placed anywhere on the circle.
+
+The text with the sector number is located dynamically in the center of the sector.
+
+## Versions Used
+<ul>
+<li>Unity 2020.3.7f1</li>
+<li>DOTween v 1.2.632</li>
+</ul>
+![image](https://user-images.githubusercontent.com/48056797/185156707-1e3b0764-24bf-4f34-a4e2-765d2979a4be.png)
