@@ -25,4 +25,4 @@ The text with the sector number is located dynamically in the center of the sect
 <li>Unity 2020.3.7f1</li>
 <li>DOTween v 1.2.632</li>
 </ul>
-![image](https://user-images.githubusercontent.com/48056797/185156707-1e3b0764-24bf-4f34-a4e2-765d2979a4be.png)
+<img src="https://user-images.githubusercontent.com/48056797/185156707-1e3b0764-24bf-4f34-a4e2-765d2979a4be.png">
